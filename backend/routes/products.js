@@ -1,24 +1,9 @@
+// routes/products.js
 import express from "express";
 const productsRouter = express.Router();
 
 import db from "../db/client.js";
-import jwt from "jsonwebtoken";
-
-// Middleware to require user
-function requireUser(req, res, next) {
-  const auth = req.headers.authorization;
-  if (!auth?.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Token missing or malformed." });
-  }
-  const token = auth.split(" ")[1];
-  try {
-    const user = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = user;
-    next();
-  } catch (err) {
-    res.status(401).json({ error: "Invalid or expired token." });
-  }
-}
+import requireUser from "../middleware/requiredUser.js"; // Import shared middleware
 
 // GET /products — list all products
 productsRouter.get("/", async (req, res) => {
