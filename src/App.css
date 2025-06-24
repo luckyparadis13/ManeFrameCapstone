@@ -1,0 +1,248 @@
+/* RESET */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Cormorant Garamond", serif;
+  background-color: #ffffff;
+  color: #111;
+  line-height: 1.6;
+}
+@font-face {
+  font-family: "Adelia";
+  src: url("./assets/fonts/adelia.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* NAVBAR */
+.NavBar {
+  display: flex;
+  justify-content: space-between; /* left + right */
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.SiteTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: "Libre Bodoni", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.HairBy {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.LuckyModern {
+  font-family: "Adelia", cursive;
+  font-size: 3rem;
+  color: #645014;
+  letter-spacing: 0.03em;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.NavLinks {
+  display: flex;
+  gap: 3rem;
+}
+
+.NavLinks a {
+  text-decoration: none;
+  color: #111;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.NavLinks a:hover {
+  color: #645014;
+}
+
+/* HERO SECTION */
+.Hero {
+  position: relative;
+  display: flex;
+  justify-content: center; /* center the image horizontally */
+  width: 100%;
+}
+
+.HeroImages {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.HeroImages img {
+  width: 100%;
+  max-width: 1200px; /* or whatever max width looks nice on your screen */
+  height: auto;
+  display: block;
+}
+
+.HeroOverlay {
+  position: absolute;
+  bottom: 400px; /* space from bottom */
+  left: 200px; /* space from left */
+  background-color: rgba(206, 159, 159, 0.8); /* light transparent background */
+  padding: 1.5rem 1.7rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  color: #111;
+  max-width: 550px;
+}
+
+/* SERVICES SECTION */
+.Services {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.Services h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.ServicesGrid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.ServiceItem {
+  max-width: 300px;
+}
+
+.ServiceItem img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.ServiceItem h3 {
+  margin: 1rem 0 0.5rem;
+}
+
+.ServiceItem p {
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+
+/* PORTFOLIO */
+.Portfolio {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.Portfolio h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.PortfolioGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.PortfolioGrid img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.ViewWorkBtn {
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  border: 1px solid #111;
+  cursor: pointer;
+}
+
+.ViewWorkBtn:hover {
+  background-color: #111;
+  color: #fff;
+}
+
+/* ZIGGY BLOCK */
+.ZiggyBlock {
+  background-color: #f6e1db;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.ZiggyBlock img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.ZiggyBlock h2 {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.ZiggyBlock h3 {
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+.ZiggyBlock button {
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 1px solid #111;
+  cursor: pointer;
+}
+
+.ZiggyBlock button:hover {
+  background-color: #111;
+  color: #fff;
+}
+
+/* FOOTER */
+.Footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.FooterBookBtn {
+  margin-bottom: 1rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 1px solid #111;
+  cursor: pointer;
+}
+
+.FooterBookBtn:hover {
+  background-color: #111;
+  color: #fff;
+}
