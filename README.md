@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ManeFrame Frontend
 Fullstack Capstone Project — June 2025
 Author: Lucky Paradis
@@ -56,6 +55,4 @@ Database must be seeded using schema.sql and seed.sql
 
 🔥 Thank you for reviewing my project!
 🔥 Created with ❤️ by Lucky Paradis — June 2025
-=======
-# ManeFrameCapstone
->>>>>>> a890f084118d54e49a593c57688577a50ca6efda
+
