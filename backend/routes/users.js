@@ -1,23 +1,29 @@
-// routes/users.js
 import express from "express";
+import db from "../db/client.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import db from "../db/client.js";
-import requireUser from "../middleware/requiredUser.js";
 
-const usersRouter = express.Router();
+const router = express.Router();
 
 // POST /users/register
-usersRouter.post("/register", async (req, res) => {
+router.post("/register", async (req, res) => {
   const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ error: "Username and password required." });
-  }
-
   try {
+    // Check if user already exists
+    const { rows: existingUsers } = await db.query(
+      `SELECT * FROM users WHERE username = $1;`,
+      [username]
+    );
+
+    if (existingUsers.length > 0) {
+      return res.status(409).json({ error: "Username already taken." });
+    }
+
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Insert new user
     const {
       rows: [user],
     } = await db.query(
@@ -27,58 +33,46 @@ usersRouter.post("/register", async (req, res) => {
       [username, hashedPassword]
     );
 
-    const token = jwt.sign(
-      { id: user.id, username: user.username },
-      process.env.JWT_SECRET,
-      { expiresIn: "1w" }
-    );
-
-    res.status(201).json({ token });
+    res.status(201).json({ message: "User registered successfully!", user });
   } catch (err) {
-    console.error(err);
+    console.error("Error registering user:", err);
     res.status(500).json({ error: "Failed to register user." });
   }
 });
 
 // POST /users/login
-usersRouter.post("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ error: "Username and password required." });
-  }
-
   try {
+    // Find user
     const {
       rows: [user],
-    } = await db.query(`SELECT * FROM users WHERE username = $1`, [username]);
+    } = await db.query(`SELECT * FROM users WHERE username = $1;`, [username]);
 
     if (!user) {
       return res.status(401).json({ error: "Invalid username or password." });
     }
 
+    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid username or password." });
     }
 
+    // Create token with { id: user.id }
     const token = jwt.sign(
       { id: user.id, username: user.username },
       process.env.JWT_SECRET,
-      { expiresIn: "1w" }
+      { expiresIn: "7d" }
     );
 
     res.json({ token });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to log in." });
+    console.error("Error logging in:", err);
+    res.status(500).json({ error: "Failed to login." });
   }
 });
 
-// GET /users/me
-usersRouter.get("/me", requireUser, (req, res) => {
-  res.json({ user: req.user });
-});
-
-export default usersRouter;
+export default router;

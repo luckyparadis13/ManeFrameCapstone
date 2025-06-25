@@ -1,0 +1,130 @@
+/* App.css */
+
+/* RESET */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #a09789;
+  color: #f5f0ec;
+  font-family: "Work Sans", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* SITE WRAPPER */
+.SiteWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* HEADER */
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+}
+
+.HeaderLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.Name {
+  font-size: 2rem;
+  font-color:var(--main-green)
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.Email {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #274b3a;
+}
+
+.HeaderNav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.HeaderNav a {
+  color: #f5f0ec;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* FOOTER */
+.Footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 0;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(245, 240, 236, 0.2);
+}
+
+.FooterLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.FooterLinks a {
+  color: #f5f0ec;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+
+.FooterLinks a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* VARIABLES */
+:root {
+  --dark-bg: #8e8677;
+  --light-bg: #ffffff;
+  --navbar-dark: #ffffff;
+  --navbar-light: #8e8677;
+  --text-dark: #ffffff;
+  --text-light: #333333;
+  --accent-color: #c8b5a6;
+  --main-green: #274b3a;
+}
+
+/* TYPOGRAPHY */
+body {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+}
+
+/* LIGHT THEME */
+.LightTheme {
+  background-color: var(--light-bg);
+  color: var(--text-light);
+}
+
+.LightTheme .HeaderNav {
+  background-color: var(--navbar-light);
+}
+
+.LightTheme .Footer {
+  background-color: var(--navbar-light);
+  color: var(--text-light);
+}

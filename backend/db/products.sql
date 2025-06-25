@@ -1,19 +1,5 @@
--- SEED.SQL — full DB rebuild for users, products, appointments, orders
+-- products.sql
 
--- USERS TABLE
-DROP TABLE IF EXISTS users CASCADE;
-
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL
-);
-
-INSERT INTO users (username, password)
-VALUES ('luckyparadis', 'secret123')
-ON CONFLICT (username) DO NOTHING;
-
--- PRODUCTS TABLE
 DROP TABLE IF EXISTS products;
 
 CREATE TABLE products (
@@ -37,25 +23,3 @@ INSERT INTO products (name, description, price, category, image_url, purchase_ur
 ('Scalp Detox Treatment', 'Removes buildup, refreshes scalp.', 38.00, 'Treatment', '/assets/prod8.jpg', 'https://square.link/u/bJ6c4FzW'),
 ('Leave-in Conditioner', 'Lightweight detangler & hydrator.', 30.00, 'Conditioner', '/assets/prod9.jpg', 'https://square.link/u/CfEHYHcb'),
 ('Shine Serum', 'Adds glossy finish & tames flyaways.', 35.00, 'Styling', '/assets/prod10.jpg', 'https://square.link/u/9cq1QjIE');
-
--- APPOINTMENTS TABLE
-DROP TABLE IF EXISTS appointments;
-
-CREATE TABLE appointments (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
-  time TIME NOT NULL,
-  service_type TEXT NOT NULL,
-  notes TEXT
-);
-
--- ORDERS TABLE
-DROP TABLE IF EXISTS orders;
-
-CREATE TABLE orders (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  order_date TIMESTAMP DEFAULT NOW(),
-  total NUMERIC(10, 2) NOT NULL
-);

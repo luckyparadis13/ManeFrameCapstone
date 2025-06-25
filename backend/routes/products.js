@@ -36,20 +36,21 @@ productsRouter.get("/:id", async (req, res) => {
   }
 });
 
-// POST /products — create product (admin only, simple example)
+// POST /products — create product
 productsRouter.post("/", requireUser, async (req, res) => {
-  const { title, description, price, inventory } = req.body;
+  const { name, description, price, category, image_url, purchase_url } =
+    req.body;
 
   try {
     const {
       rows: [product],
     } = await db.query(
       `
-      INSERT INTO products (title, description, price, inventory)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO products (name, description, price, category, image_url, purchase_url)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
       `,
-      [title, description, price, inventory]
+      [name, description, price, category, image_url, purchase_url]
     );
 
     res.status(201).json(product);
@@ -62,7 +63,8 @@ productsRouter.post("/", requireUser, async (req, res) => {
 // PUT /products/:id — update product
 productsRouter.put("/:id", requireUser, async (req, res) => {
   const productId = req.params.id;
-  const { title, description, price, inventory } = req.body;
+  const { name, description, price, category, image_url, purchase_url } =
+    req.body;
 
   try {
     const {
@@ -70,11 +72,11 @@ productsRouter.put("/:id", requireUser, async (req, res) => {
     } = await db.query(
       `
       UPDATE products
-      SET title = $1, description = $2, price = $3, inventory = $4
-      WHERE id = $5
+      SET name = $1, description = $2, price = $3, category = $4, image_url = $5, purchase_url = $6
+      WHERE id = $7
       RETURNING *;
       `,
-      [title, description, price, inventory, productId]
+      [name, description, price, category, image_url, purchase_url, productId]
     );
 
     if (!product) {

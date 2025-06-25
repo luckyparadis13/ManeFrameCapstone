@@ -7,16 +7,20 @@ const ordersRouter = express.Router();
 
 // POST /orders — create new order
 ordersRouter.post("/", requireUser, async (req, res) => {
-  const { date, total } = req.body;
+  const { order_date, total } = req.body;
 
   try {
     const {
       rows: [order],
     } = await db.query(
-      `INSERT INTO orders (user_id, date, total)
-       VALUES ($1, $2, $3)
-       RETURNING *;`,
-      [req.user.id, date, total]
+      order_date
+        ? `INSERT INTO orders (user_id, order_date, total)
+           VALUES ($1, $2, $3)
+           RETURNING *;`
+        : `INSERT INTO orders (user_id, total)
+           VALUES ($1, $2)
+           RETURNING *;`,
+      order_date ? [req.user.id, order_date, total] : [req.user.id, total]
     );
 
     res.status(201).json(order);
@@ -28,9 +32,10 @@ ordersRouter.post("/", requireUser, async (req, res) => {
 
 // GET /orders — get user's orders
 ordersRouter.get("/", requireUser, async (req, res) => {
+  console.log("req.user in GET /orders:", req.user);
   try {
     const { rows } = await db.query(
-      `SELECT * FROM orders WHERE user_id = $1 ORDER BY date DESC;`,
+      `SELECT * FROM orders WHERE user_id = $1 ORDER BY order_date DESC;`,
       [req.user.id]
     );
 

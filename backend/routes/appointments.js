@@ -9,6 +9,9 @@ const appointmentsRouter = express.Router();
 appointmentsRouter.post("/", requireUser, async (req, res) => {
   const { date, time, service_type, notes } = req.body;
 
+  console.log("req.user.id:", req.user.id);
+  console.log("req.body:", req.body);
+
   try {
     const {
       rows: [appt],
